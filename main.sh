@@ -5,17 +5,20 @@ function open_workspace(){
       1)
         tmux split-window -h -t $1
         tmux send-keys -t $1:1 fluxx Enter
-        tmux send-keys -t $1:1 dyn Enter
+        tmux send-keys -t $1:1 bes Enter
+        tmux select-layout -t $1 even-horizontal
         ;;
       2)
         tmux split-window -h -t $1
         tmux send-keys -t $1:1 fluxx Enter
         tmux send-keys -t $1:1 que Enter
+        tmux select-layout -t $1 even-horizontal
         ;;
       3)
         tmux split-window -h -t $1
         tmux send-keys -t $1:1 fluxx Enter
-        tmux send-keys -t $1:1 bes Enter
+        tmux send-keys -t $1:1 dyn Enter
+        tmux select-layout -t $1 even-horizontal
         ;;
       4)
         tmux split-window -v -t $1
@@ -25,7 +28,6 @@ function open_workspace(){
         echo Thats All
         ;;
     esac
-    tmux select-layout -t $1 even-horizontal
   done
 }
 
@@ -37,7 +39,6 @@ tmux has-session -t $base_session || tmux new-session -d -s $base_session
 client_cnt=$(tmux list-clients | wc -l)
 session_name=$base_session
 if [ $client_cnt -ge 1  ]; then
-  echo "this is me"
   tmux new-session -d -t $base_session
   tmux attach-session -t $session_name
   open_workspace $base_session
