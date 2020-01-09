@@ -1,6 +1,6 @@
 #!/bin/bash
 function open_workspace(){
-  for f in `seq 1 4`; do
+  for f in `seq 1 4 `; do
     case $f in
       1)
         tmux split-window -h -t $1
@@ -18,7 +18,7 @@ function open_workspace(){
         tmux send-keys -t $1:1 bes Enter
         ;;
       4)
-        tmux split-window -h -t $1
+        tmux split-window -v -t $1
         tmux send-keys -t $1:1 es Enter
         ;;
       *)
@@ -43,17 +43,12 @@ if [ $client_cnt -ge 1  ]; then
   open_workspace $base_session
   tmux new-window -t $session_name:2
   tmux send-keys -t $session_name:2 fluxx Enter
-  tmux send-keys -t $session_name:2 vim Enter
+  tmux send-keys -t $session_name:2 'vim .' Enter
 else
   tmux -2 attach-session -t $base_session
   open_workspace $base_session
   tmux new-window -t $base_session:2
   tmux send-keys -t $base_session:2 fluxx Enter
-  tmux send-keys -t $base_session:2 vim . Enter
+  tmux send-keys -t $base_session:2 'vim .' Enter
 fi
 #fi
-
-
-
-# tmux detach-client
-# tmux attach-session -t my_work_space
