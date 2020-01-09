@@ -20,13 +20,14 @@ if [ $client_cnt -ge 1  ]; then
   tmux attach-session -t $session_name
   open_workspace $base_session
   tmux new-window -t $session_name:2
+  tmux send-keys -t $session_name:2 fluxx Enter
   tmux send-keys -t $session_name:2 vim Enter
 else
   tmux -2 attach-session -t $base_session
   open_workspace $base_session
   tmux new-window -t $base_session:2
   tmux send-keys -t $base_session:2 fluxx Enter
-  #tmux send-keys -t $base_session:2 vim Enter
+  tmux send-keys -t $base_session:2 vim Enter
 fi
 #fi
 
