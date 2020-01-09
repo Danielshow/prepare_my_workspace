@@ -1,8 +1,30 @@
 #!/bin/bash
 function open_workspace(){
-  for f in `seq 1 2`; do
-    tmux split-window -h -t $1
-    tmux send-keys -t $1:1 fluxx Enter
+  for f in `seq 1 4`; do
+    case $f in
+      1)
+        tmux split-window -h -t $1
+        tmux send-keys -t $1:1 fluxx Enter
+        tmux send-keys -t $1:1 dyn Enter
+        ;;
+      2)
+        tmux split-window -h -t $1
+        tmux send-keys -t $1:1 fluxx Enter
+        tmux send-keys -t $1:1 que Enter
+        ;;
+      3)
+        tmux split-window -h -t $1
+        tmux send-keys -t $1:1 fluxx Enter
+        tmux send-keys -t $1:1 bes Enter
+        ;;
+      4)
+        tmux split-window -h -t $1
+        tmux send-keys -t $1:1 es Enter
+        ;;
+      *)
+        echo Thats All
+        ;;
+    esac
     tmux select-layout -t $1 even-horizontal
   done
 }
@@ -27,7 +49,7 @@ else
   open_workspace $base_session
   tmux new-window -t $base_session:2
   tmux send-keys -t $base_session:2 fluxx Enter
-  tmux send-keys -t $base_session:2 vim Enter
+  tmux send-keys -t $base_session:2 vim . Enter
 fi
 #fi
 
